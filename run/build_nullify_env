@@ -1,0 +1,9 @@
+#!/usr/bin/env -S deno run --allow-all
+import { toImportJsAsString } from "../support/toStringImport.js"
+import { FileSystem } from "https://deno.land/x/quickr@0.8.6/main/file_system.js"
+
+const sourcePath = `${FileSystem.thisFolder}/../support/null_env.js`
+const targetPath = `${FileSystem.thisFolder}/../bundles/null_env.js`
+
+const string = await toImportJsAsString(sourcePath)
+await FileSystem.write({path:targetPath, data: string, overwrite: true})
