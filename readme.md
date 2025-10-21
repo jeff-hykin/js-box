@@ -52,11 +52,11 @@ setTimeout(()=>{
     console.log("race condition2", deterministic1) // true
     setTimeout(()=>{
         console.log("race condition2.1", deterministic1) // true
-    }, 500)
+    }, 499)
     setTimeout(()=>{
         console.log("race condition2.2", deterministic1) // true
     }, 500)
-}, 500)
+}, 498)
 ```
 
 
