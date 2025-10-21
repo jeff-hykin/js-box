@@ -39,8 +39,8 @@ js-box ./file.js --output ./file.deterministic.js
 import "https://esm.sh/gh/jeff-hykin/js-box@0.1.0.1/main/nullifyEnv.js"
 let deterministic1 = 10 + new Date().getTime()
 let deterministic2 = 10 + new Date().getTime() // time increments every time its checked
-let deterministic2 = 10 + Performance.now() // time increments every time its checked
-let deterministic3 = 10 + Math.random()
+let deterministic3 = 10 + Performance.now() // time increments every time its checked
+let deterministic4 = 10 + Math.random()
 // race conditions don't exist, even with fluxuating workloads
 setTimeout(()=>{
     console.log("race condition1", deterministic1) // true
