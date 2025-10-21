@@ -1,0 +1,31 @@
+#!/usr/bin/env -S deno run --allow-all
+import { bundle, stop } from "../support/bundle.js"
+import { toImportJsAsString } from "../support/toImportJsAsString.js"
+import { FileSystem } from "https://deno.land/x/quickr@0.8.6/main/file_system.js"
+
+const bundleTargetDir = `${FileSystem.thisFolder}/../bundles`
+await FileSystem.ensureIsFolder(bundleTargetDir)
+
+// 
+// null_env.js
+// 
+await FileSystem.write({
+    path:`${bundleTargetDir}/null_env.bundle.js`,
+    data: await bundle(`${FileSystem.thisFolder}/../support/null_env.js`),
+    overwrite: true
+})
+await FileSystem.write({
+    path:`${bundleTargetDir}/null_env.binaryify.js`,
+    data: await toImportJsAsString(`${FileSystem.thisFolder}/../support/null_env.js`),
+    overwrite: true
+})
+
+// 
+// enforce_null_env.js
+// 
+await FileSystem.write({
+    path:`${bundleTargetDir}/enforce_null_env.binaryify.js`,
+    data: await toImportJsAsString(`${FileSystem.thisFolder}/../support/enforce_null_env.js`),
+    overwrite: true
+})
+await stop()
