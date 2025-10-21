@@ -8,7 +8,7 @@ This is an experiment in different ways to make a JS environment deterministic.
 ### As Eval (any environment that supports web workers)
 
 ```js
-import { deterministicEval } from "https://esm.sh/jeff-hykin/js-box@0.1.0.0/main.js"
+import { deterministicEval } from "https://esm.sh/gh/jeff-hykin/js-box@0.1.0.1/main.js"
 // code is run in a web worker
 let x = await deterministicEval(`10 + new Date().getTime()`)
 // code is run in a web worker
@@ -36,7 +36,7 @@ js-box ./file.js --output ./file.deterministic.js
 ### As a JS Module
 
 ```js
-import "https://esm.sh/jeff-hykin/js-box@0.1.0.0/main/nullifyEnv.js"
+import "https://esm.sh/gh/jeff-hykin/js-box@0.1.0.1/main/nullifyEnv.js"
 let deterministic1 = 10 + new Date().getTime()
 let deterministic2 = 10 + new Date().getTime() // time increments every time its checked
 let deterministic2 = 10 + Performance.now() // time increments every time its checked
