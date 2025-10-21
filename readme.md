@@ -66,7 +66,7 @@ Not all JS features are available, and this system has not been hardened for run
 
 ### How does it work?
 
-Well there are several sources of JS non-determinism:
+There are many sources of JS non-determinism:
 1. Obvious API's like:
     - Timing apis like `Date.now()`, `Performance.now()`
     - Randomness from `crypto`, and `Math.random()`
