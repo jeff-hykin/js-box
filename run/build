@@ -20,28 +20,28 @@ await binaryify({
 })
 
 // 
-// nullEnv.js
+// createNullEnv.js
 // 
-console.log(`building nullEnv.js`)
-const nullEnvFunctionPath = `${FileSystem.thisFolder}/../main/nullEnv.js`
+console.log(`building createNullEnv.js`)
+const nullEnvFunctionPath = `${FileSystem.thisFolder}/../main/createNullEnv.js`
 await FileSystem.write({
-    path:`${bundleTargetDir}/nullEnv.bundle.js`,
+    path:`${bundleTargetDir}/createNullEnv.bundle.js`,
     data: await bundle(nullEnvFunctionPath),
     overwrite: true
 })
 await FileSystem.write({
-    path:`${bundleTargetDir}/nullEnv.binaryify.js`,
+    path:`${bundleTargetDir}/createNullEnv.binaryify.js`,
     data: await toImportJsAsString(nullEnvFunctionPath),
     overwrite: true
 })
 
 // 
-// enforceNullEnv.js
+// nullifyEnv.js
 // 
-console.log(`building enforceNullEnv.js`)
+console.log(`building nullifyEnv.js`)
 await FileSystem.write({
-    path:`${bundleTargetDir}/enforceNullEnv.binaryify.js`,
-    data: await toImportJsAsString(`${FileSystem.thisFolder}/../main/enforceNullEnv.js`),
+    path:`${bundleTargetDir}/nullifyEnv.binaryify.js`,
+    data: await toImportJsAsString(`${FileSystem.thisFolder}/../main/nullifyEnv.js`),
     overwrite: true
 })
 await stop()

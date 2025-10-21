@@ -23,7 +23,7 @@ import { ensureDescriptorAgreement } from "./deterministic_tooling/ensureDescrip
         // add fetch
         // maybe add Proxy
 
-export function enforceNullEnv() {
+export function createNullEnv() {
     const warnings = []
     if (typeof globalThis == 'undefined') {
         throw new Error("catestrophic error: the spec requires globalThis, but globalThis is not defined")

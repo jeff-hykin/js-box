@@ -2649,7 +2649,7 @@ runtime: \${cu(currentDescriptor)}\`);
   return warnings;
 }
 
-// main/nullEnv.js
+// main/createNullEnv.js
 function enforceNullEnv() {
   const warnings = [];
   if (typeof globalThis == "undefined") {
@@ -2761,8 +2761,8 @@ function enforceNullEnv() {
   warnings.push(...descriptorWarnings);
   return warnings;
 }
-export {
-  enforceNullEnv
-};
+
+// main/enforceNullEnv.js
+enforceNullEnv();
 `
 export default output
