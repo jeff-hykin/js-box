@@ -73,9 +73,10 @@ There are many sources of JS non-determinism:
     - Dynamic imports `import()`
     - External data `fetch`, `fs.readFileSync`
 2. Less obvious API's like:
+    - `new Error().stack `
     - `String.toLocaleLowerCase()` which uses location to know the locale
     - `Date.toLocaleString()`
-3. Static imports are (surprisingly) not deterministic. E.g. in `import "a.js";"import 'b.js'"` it is 100 valid (and happens) that the code from `b.js` finishes before the code from `a.js`.
+4. Static imports are (surprisingly) not deterministic. E.g. in `import "a.js";"import 'b.js'"` it is 100 valid (and happens) that the code from `b.js` finishes before the code from `a.js`.
 3. Event loop race conditions `setTimeout`, `runNextMacroTask`, `setInterval`, etc
 4. Non-specified details of JS runtimes like:
     - What keys are present on the global object
