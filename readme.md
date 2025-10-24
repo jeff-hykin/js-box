@@ -87,7 +87,7 @@ There are many sources of JS non-determinism:
     - etc (there's a lot)
 5. Cpu based difference in floating point math
 
-All of these are addressed in some way, except for #5 (for now). Bundling the code gets rid of the static-import non determinism. From there a function (`createNullEnv`) does extremely-aggressive patching of the global object with a whitelist of allowed globals, including a whitelist of the attributes of each of those globals. The most powerful part of this library is `main/deterministic_tooling/timingTools.js` which manages to fix race conditions. Easy aspects like `Math.random()` and `Date.now()` are patched, but the harder ones like `String.toLocaleLowerCase()` and `Date.toLocaleString()` are not yet fully patched.
+All of these are addressed in some way, except for #6 (for now). Bundling the code gets rid of the static-import non determinism. From there a function (`createNullEnv`) does extremely-aggressive patching of the global object with a whitelist of allowed globals, including a whitelist of the attributes of each of those globals. The most powerful part of this library is `main/deterministic_tooling/timingTools.js` which manages to fix race conditions. Easy aspects like `Math.random()` and `Date.now()` are patched, but the harder ones like `String.toLocaleLowerCase()` and `Date.toLocaleString()` are not yet fully patched.
 
 In practice stuff like fetch is still needed, so to make a deterministic version of fetch, see one of my other projects [Offline Fetch Shim](https://github.com/jeff-hykin/offline_fetch_shim)
 
