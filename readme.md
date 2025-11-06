@@ -4,13 +4,13 @@ This is an experiment in different ways to make a JS environment deterministic.
 
 # What would this be used for?
 
-Portability, security, and caching especially across runtimes.
+Portability, security, and caching, especially across runtimes.
 
 Ex: train a machine learning model inside JsBox (ex: NodeJS), and know that it can be exactly reproduced on a different runtime (ex: in Firefox).
 
 In practice the (eventual) idea would be
 1. Record:
-   - Pick a js program you want to be deterministic. Like test-coverage output, or the compilation of a typescript program, or the running of a gameboy emulator in js, reproducing machine learning model training process (caching). 
+   - Pick a js program you want to be deterministic. Like test-coverage output, or the compilation of a typescript program, or the running of a gameboy emulator in js. 
    - Pick any JS runtime, whether its NodeJS, or Firefox, or Deno, or Chrome
    - Run it mostly like normal, but with JsBox in record=true mode. It'll record all fetch calls, file reads, etc. It'll dump all that data into some kind of `record.js` 
 2. Reproduce the exact behavior on a different runtime
