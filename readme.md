@@ -2,6 +2,24 @@
 
 This is an experiment in different ways to make a JS environment deterministic.
 
+# What would this be used for?
+
+Portability, security, and caching especially across runtimes.
+
+Ex: train a machine learning model inside JsBox (ex: NodeJS), and know that it can be exactly reproduced on a different runtime (ex: in Firefox).
+
+In practice the (eventual) idea would be
+1. Record:
+   - Pick a js program you want to be deterministic. Like test-coverage output, or the compilation of a typescript program, or the running of a gameboy emulator in js, reproducing machine learning model training process (caching). 
+   - Pick any JS runtime, whether its NodeJS, or Firefox, or Deno, or Chrome
+   - Run it mostly like normal, but with JsBox in record=true mode. It'll record all fetch calls, file reads, etc. It'll dump all that data into some kind of `record.js` 
+2. Reproduce the exact behavior on a different runtime
+   - Pick, lets say, Firefox instead of NodeJS
+   - Give the record.js data to JsBox
+   - Run the program with JsBox and record=false (it will force the program to be completely offline, and create a fake-fetch and fake file system)
+   - Get the exact same output despite using a completely different runtime / time of day / computer host / etc. 
+   - Edit the contents of record.js as needed, or change the codebase as needed.
+   - Switch to a different runtime again, and be completely confident that the code will still work.
 
 ## Quick Usage
 
@@ -90,7 +108,3 @@ There are many sources of JS non-determinism:
 All of these are addressed in some way, except for #6 (for now). Bundling the code gets rid of the static-import non determinism. From there a function (`createNullEnv`) does extremely-aggressive patching of the global object with a whitelist of allowed globals, including a whitelist of the attributes of each of those globals. The most powerful part of this library is `main/deterministic_tooling/timingTools.js` which manages to fix race conditions. Easy aspects like `Math.random()` and `Date.now()` are patched, but the harder ones like `String.toLocaleLowerCase()` and `Date.toLocaleString()` are not yet fully patched.
 
 In practice stuff like fetch is still needed, so to make a deterministic version of fetch, see one of my other projects [Offline Fetch Shim](https://github.com/jeff-hykin/offline_fetch_shim)
-
-## How could it work in theory?
-
-Ideally there would be a `js-box --generateExternalWorld file.js` that records fetch calls, file reads, etc and generates a `externalWorld.js` file. Then any file could be run in a fake deterministic environment with `js-box --run file2.js --with externalWorld.js`. This would be useful as a build tool, generating tests, and detecting malicious code.
